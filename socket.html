@@ -1,0 +1,80 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Mitra Mandal</title>
+    <style>
+        .input{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1> SOCKET.IO</h1>
+
+    <div class="input">
+        <input type="text"/>
+        <button type="submit", id="submit">Send</button>
+    </div>
+    
+</body>
+<script src="http://yourwebsite.com:12345/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('connect',() => {
+            console.log("socket.id ",socket.id);
+        });
+
+        let submitBtn = document.getElementById("submit");
+        submitBtn.addEventListener('click',() => {
+            socket.on('nodeJSEvent' , )
+        })
+
+    </script> 
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Chat</title>
+    <script src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="messages"></div>
+    <input id="message-input" type="text" placeholder="Type your message">
+    <button id="send-button">Send</button>
+
+    <script>
+        // Connect to the Socket.IO server
+        const socket = io();
+
+        // Handle receiving a new message
+        socket.on('message', (message) => {
+            showMessage(message);
+        });
+
+        // Send a message when the Send button is clicked
+        $('#send-button').click(() => {
+            const message = $('#message-input').val();
+            if (message.trim() !== '') {
+                socket.emit('message', message);
+                showMessage(message);
+                $('#message-input').val('');
+            }
+        });
+
+        // Function to display a new message
+        function showMessage(message) {
+            const messageElement = $('<div>').text(message);
+            $('#messages').append(messageElement);
+        }
+    </script>
+</body>
+</html>
